@@ -75,22 +75,33 @@ const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
 
 /////////////////////////////////////////////////
 
-let arr = ['a', 'b', 'c', 'd', 'e'];
+// let arr = ['a', 'b', 'c', 'd', 'e'];
 
-console.log(arr.slice(1, 3));
-console.log(arr.slice(2, 4));
-console.log(arr.slice(-4, 4));
+// console.log(arr.slice(1, 3));
+// console.log(arr.slice(2, 4));
+// console.log(arr.slice(-4, 4));
 
-console.log(arr.splice(1, 3));
-console.log(arr);
+// console.log(arr.splice(1, 3));
+// console.log(arr);
 
-// REVERSE
-const arr2 = ['f', 'g', 'h', 'i', 'j'];
-console.log(arr2.reverse());
+// // REVERSE
+// const arr2 = ['f', 'g', 'h', 'i', 'j'];
+// console.log(arr2.reverse());
 
-// CONCAT
-const letters = arr.concat(arr2);
-console.log(letters);
+// // CONCAT
+// const letters = arr.concat(arr2);
+// console.log(letters);
 
-// JOIN
-console.log(letters.join('*'));
+// // JOIN
+// console.log(letters.join('*'));
+
+// const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+movements.forEach((movement, i) => {
+  if (movement > 0) {
+    console.log(`${i + 1}: You were credited ${movement} million dollars`);
+  } else {
+    console.log(
+      `${i + 1}: You were debited ${Math.abs(movement)} million dollars`
+    );
+  }
+});
