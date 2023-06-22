@@ -8,8 +8,8 @@ const checkDogs = function (dogsJulia, dogsKate) {
   console.log(allDogs);
   allDogs.forEach((dog, i) => {
     dog >= 3
-      ? console.log(`Dog ${i + 1} is an adult`)
-      : console.log(`Dog ${i + 1} is a puppy`);
+      ? console.log(`Dog ${i + 1} is ${dog} years old and is an adult`)
+      : console.log(`Dog ${i + 1} is ${dog} years old and is a puppy`);
   });
 };
 const juliaDogs = [3, 5, 2, 12, 7];
