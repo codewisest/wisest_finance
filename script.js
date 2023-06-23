@@ -133,3 +133,34 @@ displayMovements(account1.movements);
 // currencies.forEach((value, key) => {
 //   console.log(`${key}: ${value}`);
 // });
+
+const eurToUsd = 1.1;
+const movementsDollars = account1.movements.map(movement => {
+  return movement * eurToUsd;
+  // console.log(movement * eurToUsd);
+});
+
+console.log(movementsDollars);
+
+account1.movements.map((movement, i) => {
+  if (movement > 0) {
+    console.log(`${i + 1}: You were credited ${movement} million dollars`);
+  } else {
+    console.log(
+      `${i + 1}: You were debited ${Math.abs(movement)} million dollars`
+    );
+  }
+});
+
+const createUserNames = function (acc) {
+  acc.forEach(account => {
+    const userNames = account.owner.split(' ');
+    const initials = userNames.map(oneName => {
+      return oneName.slice(0, 1).toLowerCase();
+    });
+    account.username = initials.join('');
+    console.log(account);
+  });
+};
+
+createUserNames(accounts);
