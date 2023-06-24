@@ -16,3 +16,20 @@ const juliaDogs = [3, 5, 2, 12, 7];
 const kateDogs = [4, 1, 15, 8, 3];
 
 checkDogs(juliaDogs, kateDogs);
+
+const calcAverageHumanAge = dogsAges => {
+  const dogsHumanAges = dogsAges.map(dogAge => {
+    return dogAge <= 2 ? 2 * dogAge : 16 + dogAge * 4;
+  });
+  console.log(dogsHumanAges);
+
+  const adultDogs = dogsHumanAges.filter(dogAgeHuman => {
+    return !(dogAgeHuman < 18);
+  });
+  console.log(adultDogs);
+};
+
+const data1 = [5, 2, 4, 1, 15, 8, 3];
+const data2 = [16, 6, 10, 5, 6, 1, 4];
+
+calcAverageHumanAge(data1);
