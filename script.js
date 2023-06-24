@@ -97,7 +97,7 @@ const calcPrintBalance = function (movements) {
   const balance = movements.reduce((accumulator, current, i) => {
     return accumulator + current;
   });
-  labelBalance.textContent = `${balance} EUR`;
+  labelBalance.textContent = `${balance} €`;
 };
 calcPrintBalance(account1.movements);
 /////////////////////////////////////////////////
@@ -190,3 +190,9 @@ const balance = account1.movements.reduce((accumulator, current, i) => {
   return accumulator + current;
 }, 0);
 console.log(balance);
+
+const maxMovement = account1.movements.reduce((accumulator, current) => {
+  return accumulator > current ? accumulator : current;
+});
+
+console.log(maxMovement);
