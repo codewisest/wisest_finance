@@ -79,6 +79,27 @@ const displayMovements = function (movements) {
 };
 
 displayMovements(account1.movements);
+
+const createUserNames = function (acc) {
+  acc.forEach(account => {
+    const userNames = account.owner.split(' ');
+    const initials = userNames.map(oneName => {
+      return oneName.slice(0, 1).toLowerCase();
+    });
+    account.username = initials.join('');
+    console.log(account);
+  });
+};
+
+createUserNames(accounts);
+
+const calcPrintBalance = function (movements) {
+  const balance = movements.reduce((accumulator, current, i) => {
+    return accumulator + current;
+  });
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcPrintBalance(account1.movements);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -152,19 +173,6 @@ account1.movements.map((movement, i) => {
   }
 });
 
-const createUserNames = function (acc) {
-  acc.forEach(account => {
-    const userNames = account.owner.split(' ');
-    const initials = userNames.map(oneName => {
-      return oneName.slice(0, 1).toLowerCase();
-    });
-    account.username = initials.join('');
-    console.log(account);
-  });
-};
-
-createUserNames(accounts);
-
 const deposits = account1.movements.filter(movement => {
   return movement > 0;
 });
@@ -176,3 +184,9 @@ const withdrawals = account1.movements.filter(movement => {
 });
 
 console.log(withdrawals);
+
+const balance = account1.movements.reduce((accumulator, current, i) => {
+  console.log(`Iteration ${i}: ${accumulator}`);
+  return accumulator + current;
+}, 0);
+console.log(balance);
