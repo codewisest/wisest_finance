@@ -195,4 +195,8 @@ const maxMovement = account1.movements.reduce((accumulator, current) => {
   return accumulator > current ? accumulator : current;
 });
 
-console.log(maxMovement);
+const minMovement = account1.movements.reduce((accumulator, current) => {
+  return accumulator < current ? accumulator : current;
+});
+
+console.log(minMovement);
