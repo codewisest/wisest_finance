@@ -27,6 +27,13 @@ const calcAverageHumanAge = dogsAges => {
     return !(dogAgeHuman < 18);
   });
   console.log(adultDogs);
+
+  const totalDogHumanAge = adultDogs.reduce((accumulator, current) => {
+    return accumulator + current;
+  });
+
+  const averageDogHumanAge = totalDogHumanAge / adultDogs.length;
+  console.log(averageDogHumanAge);
 };
 
 const data1 = [5, 2, 4, 1, 15, 8, 3];
