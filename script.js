@@ -93,6 +93,43 @@ const createUserNames = function (acc) {
 
 createUserNames(accounts);
 
+const calcDisplaySummary = function (movements) {
+  const depositUSD = movements
+    .filter(movement => movement > 0)
+    .reduce((accumulator, current) => accumulator + current);
+
+  labelSumIn.textContent = depositUSD + '₤';
+  console.log(depositUSD);
+};
+
+calcDisplaySummary(account1.movements);
+
+const calcDisplaySummaryOut = function (movements) {
+  const depositUSD = movements
+    .filter(movement => movement < 0)
+    .reduce((accumulator, current) => accumulator + current);
+
+  labelSumOut.textContent = Math.abs(depositUSD) + '₤';
+  console.log(depositUSD);
+};
+
+calcDisplaySummaryOut(account1.movements);
+
+const calcDisplayInterest = function (movements, interest) {
+  const totalInterest = movements
+    .filter(movement => movement > 0)
+    .map((movement, i, arr) => {
+      return movement * interest;
+    })
+    .filter(movement => {
+      return movement >= 1;
+    })
+    .reduce((accumulator, current) => accumulator + current);
+
+  labelSumInterest.textContent = totalInterest + '₤';
+};
+calcDisplayInterest(account1.movements, 0.012);
+
 const calcPrintBalance = function (movements) {
   const balance = movements.reduce((accumulator, current, i) => {
     return accumulator + current;
@@ -200,3 +237,11 @@ const minMovement = account1.movements.reduce((accumulator, current) => {
 });
 
 console.log(minMovement);
+
+// get deposits in usd
+const depositUSD =
+  account1.movements
+    .filter(movement => movement > 0)
+    .reduce((accumulator, current) => accumulator + current) * eurToUsd;
+
+console.log(depositUSD);
