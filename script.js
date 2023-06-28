@@ -245,3 +245,20 @@ const depositUSD =
     .reduce((accumulator, current) => accumulator + current) * eurToUsd;
 
 console.log(depositUSD);
+
+const firstDebit = account1.movements.find(movement => movement < 0);
+
+console.log(firstDebit);
+
+const account = accounts.find(account => account.owner === 'Jessica Davis');
+
+console.log(account);
+
+// find using for-of
+for (const account of accounts) {
+  if (account.owner === 'Jessica Davis') {
+    const accountForOf = account;
+    console.log(accountForOf);
+    break;
+  }
+}
