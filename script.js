@@ -78,7 +78,7 @@ const displayMovements = function (movements) {
   });
 };
 
-displayMovements(account1.movements);
+// displayMovements(account1.movements);
 
 const createUserNames = function (acc) {
   acc.forEach(account => {
@@ -87,7 +87,7 @@ const createUserNames = function (acc) {
       return oneName.slice(0, 1).toLowerCase();
     });
     account.username = initials.join('');
-    console.log(account);
+    // console.log(account);
   });
 };
 
@@ -99,7 +99,7 @@ const calcDisplaySummary = function (movements) {
     .reduce((accumulator, current) => accumulator + current);
 
   labelSumIn.textContent = depositUSD + '₤';
-  console.log(depositUSD);
+  // console.log(depositUSD);
 };
 
 calcDisplaySummary(account1.movements);
@@ -107,28 +107,28 @@ calcDisplaySummary(account1.movements);
 const calcDisplaySummaryOut = function (movements) {
   const depositUSD = movements
     .filter(movement => movement < 0)
-    .reduce((accumulator, current) => accumulator + current);
+    .reduce((accumulator, current) => accumulator + current, 0);
 
   labelSumOut.textContent = Math.abs(depositUSD) + '₤';
-  console.log(depositUSD);
+  // console.log(depositUSD);
 };
 
-calcDisplaySummaryOut(account1.movements);
+// calcDisplaySummaryOut(account1.movements);
 
 const calcDisplayInterest = function (movements, interest) {
   const totalInterest = movements
     .filter(movement => movement > 0)
     .map((movement, i, arr) => {
-      return movement * interest;
+      return movement * (interest / 100);
     })
     .filter(movement => {
       return movement >= 1;
     })
-    .reduce((accumulator, current) => accumulator + current);
+    .reduce((accumulator, current) => accumulator + current, 0);
 
   labelSumInterest.textContent = totalInterest + '₤';
 };
-calcDisplayInterest(account1.movements, 0.012);
+// calcDisplayInterest(account1.movements, 0.012);
 
 const calcPrintBalance = function (movements) {
   const balance = movements.reduce((accumulator, current, i) => {
@@ -136,7 +136,30 @@ const calcPrintBalance = function (movements) {
   });
   labelBalance.textContent = `${balance} €`;
 };
-calcPrintBalance(account1.movements);
+
+// Event handler
+let currentAccount;
+btnLogin.addEventListener('click', evt => {
+  evt.preventDefault();
+  currentAccount = accounts.find(account => {
+    return account.username === inputLoginUsername.value;
+  });
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    containerApp.style.opacity = '1';
+
+    // clear input fields
+    inputLoginUsername.value = inputLoginPin.value = '';
+    inputLoginPin.blur();
+    labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
+    displayMovements(currentAccount.movements);
+    calcPrintBalance(currentAccount.movements);
+    calcDisplaySummary(currentAccount.movements);
+    calcDisplaySummaryOut(currentAccount.movements);
+    calcDisplayInterest(currentAccount.movements, currentAccount.interestRate);
+  }
+});
+console.log(currentAccount);
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -192,73 +215,73 @@ calcPrintBalance(account1.movements);
 //   console.log(`${key}: ${value}`);
 // });
 
-const eurToUsd = 1.1;
-const movementsDollars = account1.movements.map(movement => {
-  return movement * eurToUsd;
-  // console.log(movement * eurToUsd);
-});
+// const eurToUsd = 1.1;
+// const movementsDollars = account1.movements.map(movement => {
+//   return movement * eurToUsd;
+//   // console.log(movement * eurToUsd);
+// });
 
-console.log(movementsDollars);
+// console.log(movementsDollars);
 
-account1.movements.map((movement, i) => {
-  if (movement > 0) {
-    console.log(`${i + 1}: You were credited ${movement} million dollars`);
-  } else {
-    console.log(
-      `${i + 1}: You were debited ${Math.abs(movement)} million dollars`
-    );
-  }
-});
+// account1.movements.map((movement, i) => {
+//   if (movement > 0) {
+//     console.log(`${i + 1}: You were credited ${movement} million dollars`);
+//   } else {
+//     console.log(
+//       `${i + 1}: You were debited ${Math.abs(movement)} million dollars`
+//     );
+//   }
+// });
 
-const deposits = account1.movements.filter(movement => {
-  return movement > 0;
-});
+// const deposits = account1.movements.filter(movement => {
+//   return movement > 0;
+// });
 
-console.log(deposits);
+// console.log(deposits);
 
-const withdrawals = account1.movements.filter(movement => {
-  return movement < 0;
-});
+// const withdrawals = account1.movements.filter(movement => {
+//   return movement < 0;
+// });
 
-console.log(withdrawals);
+// console.log(withdrawals);
 
-const balance = account1.movements.reduce((accumulator, current, i) => {
-  console.log(`Iteration ${i}: ${accumulator}`);
-  return accumulator + current;
-}, 0);
-console.log(balance);
+// const balance = account1.movements.reduce((accumulator, current, i) => {
+//   console.log(`Iteration ${i}: ${accumulator}`);
+//   return accumulator + current;
+// }, 0);
+// console.log(balance);
 
-const maxMovement = account1.movements.reduce((accumulator, current) => {
-  return accumulator > current ? accumulator : current;
-});
+// const maxMovement = account1.movements.reduce((accumulator, current) => {
+//   return accumulator > current ? accumulator : current;
+// });
 
-const minMovement = account1.movements.reduce((accumulator, current) => {
-  return accumulator < current ? accumulator : current;
-});
+// const minMovement = account1.movements.reduce((accumulator, current) => {
+//   return accumulator < current ? accumulator : current;
+// });
 
-console.log(minMovement);
+// console.log(minMovement);
 
 // get deposits in usd
-const depositUSD =
-  account1.movements
-    .filter(movement => movement > 0)
-    .reduce((accumulator, current) => accumulator + current) * eurToUsd;
+// const depositUSD =
+//   account1.movements
+//     .filter(movement => movement > 0)
+//     .reduce((accumulator, current) => accumulator + current) * eurToUsd;
 
-console.log(depositUSD);
+// console.log(depositUSD);
 
-const firstDebit = account1.movements.find(movement => movement < 0);
+// const firstDebit = account1.movements.find(movement => movement < 0);
 
-console.log(firstDebit);
+// console.log(firstDebit);
 
-const account = accounts.find(account => account.owner === 'Jessica Davis');
+// const account = accounts.find(account => account.owner === 'Jessica Davis');
 
-console.log(account);
+// console.log(account);
 
 // find using for-of
-for (const account of accounts) {
-  if (account.owner === 'Jessica Davis') {
-    const accountForOf = account;
-    console.log(accountForOf);
-    break;
-  }
-}
+// for (const account of accounts) {
+//   if (account.owner === 'Jessica Davis') {
+//     const accountForOf = account;
+//     console.log(accountForOf);
+//     break;
+//   }
+// }
