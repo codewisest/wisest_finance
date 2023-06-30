@@ -208,18 +208,12 @@ btnClose.addEventListener('click', evt => {
   evt.preventDefault();
 
   const accountIndex = findAccountIndex(currentAccount);
-  console.log(accountIndex);
-  console.log(
-    inputCloseUsername.value,
-    currentAccount.username,
-    inputClosePin.value,
-    currentAccount.pin
-  );
   if (
     inputCloseUsername.value === currentAccount.username &&
     Number(inputClosePin.value) === currentAccount.pin
   ) {
     accounts.splice(accountIndex, 1);
+    containerApp.style.opacity = '0';
   } else {
     alert('invalid selection');
   }
