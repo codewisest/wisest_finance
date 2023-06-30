@@ -203,6 +203,24 @@ btnTransfer.addEventListener('click', evt => {
   console.log(currentAccount.movements);
 });
 
+// Request loan
+btnLoan.addEventListener('click', evt => {
+  evt.preventDefault();
+  const loanAmount = Number(inputLoanAmount.value);
+  const loanAmountDepositEligible = (10 / 100) * loanAmount;
+  const loanEligibility = currentAccount.movements.some(
+    movement => movement >= loanAmountDepositEligible
+  );
+
+  if (loanEligibility === true) {
+    currentAccount.movements.push(loanAmount);
+    updateAccount(currentAccount);
+  } else {
+    alert('You are not qualified');
+  }
+  inputLoanAmount.value = '';
+});
+
 // Close account
 btnClose.addEventListener('click', evt => {
   evt.preventDefault();
@@ -344,3 +362,9 @@ btnClose.addEventListener('click', evt => {
 //     break;
 //   }
 // }
+
+console.log(account1.movements);
+console.log(account1.movements.includes(-13));
+
+const anyDeposits = account1.movements.some(movement => movement > 1000);
+console.log(anyDeposits);
