@@ -178,7 +178,7 @@ btnTransfer.addEventListener('click', evt => {
   // Get transfer amount
   const transferAmount = Number(inputTransferAmount.value);
   const recipient = findAccountUser(inputTransferTo.value);
-
+  inputTransferAmount.value = inputTransferTo.value = '';
   // check fund availability
   if (
     recipient &&
@@ -186,7 +186,6 @@ btnTransfer.addEventListener('click', evt => {
     transferAmount > 0 &&
     currentBalance >= transferAmount
   ) {
-    console.log(recipient);
     recipient.movements.push(transferAmount);
     currentAccount.movements.push(-transferAmount);
     updateAccount(currentAccount);
