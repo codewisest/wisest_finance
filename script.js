@@ -130,12 +130,12 @@ const calcDisplayInterest = function (movements, interest) {
 };
 // calcDisplayInterest(account1.movements, 0.012);
 
-const calcPrintBalance = function (movements) {
-  const balance = movements.reduce((accumulator, current, i) => {
+const calcPrintBalance = function (account) {
+  account.balance = account.movements.reduce((accumulator, current, i) => {
     return accumulator + current;
   });
-  labelBalance.textContent = `${balance} €`;
-  return balance;
+  labelBalance.textContent = `${account.balance} €`;
+  // return balance;
 };
 
 // Event handler
@@ -160,7 +160,7 @@ console.log(currentAccount);
 
 const updateAccount = function (account) {
   displayMovements(account.movements);
-  calcPrintBalance(account.movements);
+  calcPrintBalance(account);
   calcDisplaySummary(account.movements);
   calcDisplaySummaryOut(account.movements);
   calcDisplayInterest(account.movements, account.interestRate);
@@ -173,7 +173,7 @@ const findAccountUser = user =>
 btnTransfer.addEventListener('click', evt => {
   evt.preventDefault();
   console.log(currentAccount);
-  const currentBalance = calcPrintBalance(currentAccount.movements);
+  const currentBalance = currentAccount.balance;
 
   // Get transfer amount
   const transferAmount = Number(inputTransferAmount.value);
