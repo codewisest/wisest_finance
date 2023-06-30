@@ -153,14 +153,18 @@ btnLogin.addEventListener('click', evt => {
     inputLoginUsername.value = inputLoginPin.value = '';
     inputLoginPin.blur();
     labelWelcome.textContent = `Welcome ${currentAccount.owner.split(' ')[0]}`;
-    displayMovements(currentAccount.movements);
-    calcPrintBalance(currentAccount.movements);
-    calcDisplaySummary(currentAccount.movements);
-    calcDisplaySummaryOut(currentAccount.movements);
-    calcDisplayInterest(currentAccount.movements, currentAccount.interestRate);
+    updateAccount(currentAccount);
   }
 });
 console.log(currentAccount);
+
+const updateAccount = function (account) {
+  displayMovements(account.movements);
+  calcPrintBalance(account.movements);
+  calcDisplaySummary(account.movements);
+  calcDisplaySummaryOut(account.movements);
+  calcDisplayInterest(account.movements, account.interestRate);
+};
 
 const findAccountUser = user =>
   accounts.find(account => account.username === user);
@@ -180,8 +184,7 @@ btnTransfer.addEventListener('click', evt => {
     console.log(recipient);
     recipient.movements.push(transferAmount);
     currentAccount.movements.push(-transferAmount);
-    displayMovements(currentAccount.movements);
-    calcPrintBalance(currentAccount.movements);
+    updateAccount(currentAccount);
   } else {
     alert('Insufficient fund');
   }
