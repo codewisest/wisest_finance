@@ -135,6 +135,7 @@ const calcPrintBalance = function (movements) {
     return accumulator + current;
   });
   labelBalance.textContent = `${balance} €`;
+  return balance;
 };
 
 // Event handler
@@ -160,6 +161,33 @@ btnLogin.addEventListener('click', evt => {
   }
 });
 console.log(currentAccount);
+
+const findAccountUser = user =>
+  accounts.find(account => account.username === user);
+
+// Transfer money
+btnTransfer.addEventListener('click', evt => {
+  evt.preventDefault();
+  console.log(currentAccount);
+  const currentBalance = calcPrintBalance(currentAccount.movements);
+
+  // Get transfer amount
+  const transferAmount = Number(inputTransferAmount.value);
+
+  // check fund availability
+  if (currentBalance >= transferAmount) {
+    const recipient = findAccountUser(inputTransferTo.value);
+    console.log(recipient);
+    recipient.movements.push(transferAmount);
+    currentAccount.movements.push(-transferAmount);
+    displayMovements(currentAccount.movements);
+    calcPrintBalance(currentAccount.movements);
+  } else {
+    alert('Insufficient fund');
+  }
+
+  console.log(currentAccount.movements);
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
