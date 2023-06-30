@@ -169,6 +169,13 @@ const updateAccount = function (account) {
 const findAccountUser = user =>
   accounts.find(account => account.username === user);
 
+const findAccountIndex = user => {
+  return accounts.findIndex(account => {
+    console.log(account, user);
+
+    return account.username === user.username;
+  });
+};
 // Transfer money
 btnTransfer.addEventListener('click', evt => {
   evt.preventDefault();
@@ -194,6 +201,28 @@ btnTransfer.addEventListener('click', evt => {
   }
 
   console.log(currentAccount.movements);
+});
+
+// Close account
+btnClose.addEventListener('click', evt => {
+  evt.preventDefault();
+
+  const accountIndex = findAccountIndex(currentAccount);
+  console.log(accountIndex);
+  console.log(
+    inputCloseUsername.value,
+    currentAccount.username,
+    inputClosePin.value,
+    currentAccount.pin
+  );
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    accounts.splice(accountIndex, 1);
+  } else {
+    alert('invalid selection');
+  }
 });
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
