@@ -217,6 +217,7 @@ btnClose.addEventListener('click', evt => {
   } else {
     alert('invalid selection');
   }
+  inputCloseUsername = inputClosePin = '';
 });
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
