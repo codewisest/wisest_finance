@@ -177,16 +177,21 @@ btnTransfer.addEventListener('click', evt => {
 
   // Get transfer amount
   const transferAmount = Number(inputTransferAmount.value);
+  const recipient = findAccountUser(inputTransferTo.value);
 
   // check fund availability
-  if (currentBalance >= transferAmount) {
-    const recipient = findAccountUser(inputTransferTo.value);
+  if (
+    recipient &&
+    recipient !== currentAccount &&
+    transferAmount > 0 &&
+    currentBalance >= transferAmount
+  ) {
     console.log(recipient);
     recipient.movements.push(transferAmount);
     currentAccount.movements.push(-transferAmount);
     updateAccount(currentAccount);
   } else {
-    alert('Insufficient fund');
+    alert('Invalid transaction');
   }
 
   console.log(currentAccount.movements);
