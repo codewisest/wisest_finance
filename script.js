@@ -376,6 +376,7 @@ console.log(account4.movements.every(movement => movement > 0));
 const arr = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 console.log(arr.flat(2));
 
+// flat
 const overallBalance = accounts
   .map(account => account.movements)
   .flat()
@@ -384,3 +385,10 @@ const overallBalance = accounts
   });
 
 console.log(overallBalance);
+
+// flatMap
+const overallBalance2 = accounts
+  .flatMap(account => account.movements)
+  .reduce((accumulator, current) => accumulator + current);
+
+console.log(overallBalance2);
