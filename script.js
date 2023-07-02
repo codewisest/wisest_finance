@@ -376,12 +376,11 @@ console.log(account4.movements.every(movement => movement > 0));
 const arr = [[[1, 2], 3], [4, [5, 6]], 7, 8];
 console.log(arr.flat(2));
 
-const accountMovements = accounts.map(account => account.movements);
-const allMovements = accountMovements.flat();
-console.log(allMovements);
-
-const overallBalance = allMovements.reduce((accumulator, current) => {
-  return accumulator + current;
-});
+const overallBalance = accounts
+  .map(account => account.movements)
+  .flat()
+  .reduce((accumulator, current) => {
+    return accumulator + current;
+  });
 
 console.log(overallBalance);
