@@ -166,15 +166,6 @@ const updateAccount = function (account) {
   calcDisplaySummary(account.movements);
   calcDisplaySummaryOut(account.movements);
   calcDisplayInterest(account.movements, account.interestRate);
-  const movementsDOM = document.querySelectorAll('.movements__value');
-  console.log(movementsDOM);
-  const movementsDOMArray = Array.from(movementsDOM);
-  console.log(movementsDOMArray);
-  const movementsTotal = movementsDOMArray
-    .map(movementDOM => Number(movementDOM.textContent))
-    .reduce((accumulator, current) => accumulator + current);
-
-  console.log(movementsTotal);
 };
 
 const findAccountUser = user =>
