@@ -363,32 +363,38 @@ btnClose.addEventListener('click', evt => {
 //   }
 // }
 
-console.log(account1.movements);
-console.log(account1.movements.includes(-13));
+// console.log(account1.movements);
+// console.log(account1.movements.includes(-13));
 
-const anyDeposits = account1.movements.some(movement => movement > 1000);
-console.log(anyDeposits);
+// const anyDeposits = account1.movements.some(movement => movement > 1000);
+// console.log(anyDeposits);
 
-// Every
-console.log(account1.movements.every(movement => movement > 0));
-console.log(account4.movements.every(movement => movement > 0));
+// // Every
+// console.log(account1.movements.every(movement => movement > 0));
+// console.log(account4.movements.every(movement => movement > 0));
 
-const arr = [[[1, 2], 3], [4, [5, 6]], 7, 8];
-console.log(arr.flat(2));
+// const arr = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+// console.log(arr.flat(2));
 
-// flat
-const overallBalance = accounts
-  .map(account => account.movements)
-  .flat()
-  .reduce((accumulator, current) => {
-    return accumulator + current;
-  });
+// // flat
+// const overallBalance = accounts
+//   .map(account => account.movements)
+//   .flat()
+//   .reduce((accumulator, current) => {
+//     return accumulator + current;
+//   });
 
-console.log(overallBalance);
+// console.log(overallBalance);
 
-// flatMap
-const overallBalance2 = accounts
-  .flatMap(account => account.movements)
-  .reduce((accumulator, current) => accumulator + current);
+// // flatMap
+// const overallBalance2 = accounts
+//   .flatMap(account => account.movements)
+//   .reduce((accumulator, current) => accumulator + current);
 
-console.log(overallBalance2);
+// console.log(overallBalance2);
+
+// Sorting
+// strings
+const owners = ['Chiji', 'Zach', 'Jonas', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
