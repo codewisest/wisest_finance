@@ -61,9 +61,10 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach((movement, i) => {
+  const moves = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  moves.forEach((movement, i) => {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
     const html = `
       <div class="movements__row">
@@ -237,6 +238,14 @@ btnClose.addEventListener('click', evt => {
   }
   inputCloseUsername = inputClosePin = '';
 });
+
+// Sort
+let sorted = false;
+btnSort.addEventListener('click', evt => {
+  evt.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
@@ -395,14 +404,36 @@ btnClose.addEventListener('click', evt => {
 
 // Sorting
 // strings
-const owners = ['Chiji', 'Zach', 'Jonas', 'Adam', 'Martha'];
-console.log(owners.sort());
-console.log(owners);
+// const owners = ['Chiji', 'Zach', 'Jonas', 'Adam', 'Martha'];
+// console.log(owners.sort());
+// console.log(owners);
 
-// Numbers
-console.log(account1.movements);
-account1.movements.sort((a, b) => {
-  return a - b;
-});
+// // Numbers
+// console.log(account1.movements);
+// account1.movements.sort((a, b) => {
+//   return a - b;
+// });
 
-console.log(account1.movements);
+// console.log(account1.movements);
+
+// creating arrays
+console.log([1, 2, 3, 4, 5, 6, 7]);
+console.log(new Array(1, 2, 3, 4, 5, 6, 7));
+
+const x = new Array(7);
+console.log(x);
+
+x.fill(1);
+console.log(x);
+
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+const hundredRandom = Array.from({ length: 100 }, () =>
+  Math.trunc(Math.random() * 6 + 1)
+);
+
+console.log(hundredRandom);
