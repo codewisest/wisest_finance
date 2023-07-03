@@ -52,3 +52,35 @@ dogs.forEach(dog => {
 });
 
 console.log(dogs);
+
+const dogSarah = dogs.find(dog => {
+  return dog.owners.includes('Sarah');
+});
+
+console.log(dogSarah.curFood);
+
+const checkConsumption = function (dog) {
+  const tenPercentRecommended = dog.recommendedFood * 0.1;
+
+  if (dog.curFood > dog.recommendedFood + tenPercentRecommended) {
+    console.log('Excess consumption');
+  } else if (dog.curFood < dog.recommendedFood - tenPercentRecommended) {
+    console.log('Too little consumption');
+  } else {
+    console.log('Moderate consumption');
+  }
+};
+
+checkConsumption(dogSarah);
+checkConsumption(dogs[3]);
+
+const ownersEatTooMuch = dogs
+  .filter(dog => {
+    const tenPercentRecommended = dog.recommendedFood * 0.1;
+
+    return dog.curFood > dog.recommendedFood + tenPercentRecommended;
+  })
+  .map(dog => dog.owners)
+  .flat();
+
+console.log(ownersEatTooMuch);
