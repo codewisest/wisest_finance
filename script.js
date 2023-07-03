@@ -398,3 +398,11 @@ btnClose.addEventListener('click', evt => {
 const owners = ['Chiji', 'Zach', 'Jonas', 'Adam', 'Martha'];
 console.log(owners.sort());
 console.log(owners);
+
+// Numbers
+console.log(account1.movements);
+account1.movements.sort((a, b) => {
+  return a - b;
+});
+
+console.log(account1.movements);
