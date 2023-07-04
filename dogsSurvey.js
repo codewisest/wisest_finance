@@ -84,3 +84,41 @@ const ownersEatTooMuch = dogs
   .flat();
 
 console.log(ownersEatTooMuch);
+
+const ownersEatTooLittle = dogs
+  .filter(dog => {
+    const tenPercentRecommended = dog.recommendedFood * 0.1;
+
+    return dog.curFood < dog.recommendedFood - tenPercentRecommended;
+  })
+  .map(dog => dog.owners)
+  .flat();
+
+console.log(ownersEatTooLittle);
+
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
+
+// dogs eat exact amount of food
+dogs.forEach(dog => {
+  console.log(dog.curFood === dog.recommendedFood);
+});
+
+// dogs eat okay amount of food
+
+const feedingCheck = myDogs => {
+  let isEatingOkay;
+  myDogs.forEach(dog => {
+    const okayEating =
+      dog.curFood <= dog.recommendedFood + dog.recommendedFood * 0.1 &&
+      dog.curFood >= dog.recommendedFood - dog.recommendedFood * 0.1
+        ? true
+        : false;
+
+    console.log(okayEating);
+    isEatingOkay = okayEating;
+  });
+  return isEatingOkay;
+};
+
+feedingCheck(dogs);
