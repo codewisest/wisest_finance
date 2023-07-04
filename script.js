@@ -498,3 +498,29 @@ console.log(Number.parseFloat('30.5em'));
 
 console.log(Number.isNaN('23'));
 console.log(Number.isFinite('23'));
+
+console.log(Math.sqrt(25));
+
+const numbersToCheck = [5, 18, 23, 11, 2];
+console.log(Math.max(...numbersToCheck));
+console.log(Math.min(...numbersToCheck));
+
+console.log(Math.PI);
+console.log(Math.trunc(Math.random() * 6 + 1));
+
+// Random number with limit
+const randomInt = (min, max) => Math.trunc(Math.random() * (max - min) + min);
+
+console.log(randomInt(6, 10));
+
+console.log(Math.round(23.3));
+console.log(Math.round(23.9));
+
+console.log(Math.ceil(23.9));
+console.log(Math.ceil(23.9));
+
+console.log(Math.floor(23.9));
+console.log(Math.floor(23.9));
+
+console.log(Math.trunc(-23.9).toFixed(2));
+console.log(Math.floor(-23.9));
