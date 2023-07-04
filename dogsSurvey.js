@@ -106,19 +106,21 @@ dogs.forEach(dog => {
 
 // dogs eat okay amount of food
 
-const feedingCheck = myDogs => {
-  let isEatingOkay;
-  myDogs.forEach(dog => {
-    const okayEating =
-      dog.curFood <= dog.recommendedFood + dog.recommendedFood * 0.1 &&
-      dog.curFood >= dog.recommendedFood - dog.recommendedFood * 0.1
-        ? true
-        : false;
-
-    console.log(okayEating);
-    isEatingOkay = okayEating;
-  });
-  return isEatingOkay;
+const feedingCheck = dog => {
+  const okayEating =
+    dog.curFood <= dog.recommendedFood + dog.recommendedFood * 0.1 &&
+    dog.curFood >= dog.recommendedFood - dog.recommendedFood * 0.1
+      ? true
+      : false;
+  return okayEating;
 };
 
 feedingCheck(dogs);
+
+dogs.forEach(dog => {
+  console.log(feedingCheck(dog));
+});
+
+const okayEaters = dogs.filter(dog => feedingCheck(dog) === true);
+
+console.log(okayEaters);
