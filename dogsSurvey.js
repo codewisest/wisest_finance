@@ -74,6 +74,7 @@ const checkConsumption = function (dog) {
 checkConsumption(dogSarah);
 checkConsumption(dogs[3]);
 
+// 3
 const ownersEatTooMuch = dogs
   .filter(dog => {
     const tenPercentRecommended = dog.recommendedFood * 0.1;
@@ -96,15 +97,16 @@ const ownersEatTooLittle = dogs
 
 console.log(ownersEatTooLittle);
 
+// 4
 console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much`);
 console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little`);
 
-// dogs eat exact amount of food
+// 5 dogs eat exact amount of food
 dogs.forEach(dog => {
   console.log(dog.curFood === dog.recommendedFood);
 });
 
-// dogs eat okay amount of food
+// 6 dogs eat okay amount of food
 
 const feedingCheck = dog => {
   const okayEating =
@@ -117,6 +119,7 @@ const feedingCheck = dog => {
 
 feedingCheck(dogs);
 
+// 7
 dogs.forEach(dog => {
   console.log(feedingCheck(dog));
 });
@@ -125,7 +128,7 @@ const okayEaters = dogs.filter(dog => feedingCheck(dog) === true);
 
 console.log(okayEaters);
 
-// create shallow copy
+//8 create shallow copy
 const myNewDogs = dogs.slice();
 console.log(myNewDogs);
 
