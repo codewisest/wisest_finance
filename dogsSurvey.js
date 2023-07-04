@@ -124,3 +124,10 @@ dogs.forEach(dog => {
 const okayEaters = dogs.filter(dog => feedingCheck(dog) === true);
 
 console.log(okayEaters);
+
+// create shallow copy
+const myNewDogs = dogs.slice();
+console.log(myNewDogs);
+
+myNewDogs.sort((a, b) => a.recommendedFood - b.recommendedFood);
+console.log(myNewDogs);
