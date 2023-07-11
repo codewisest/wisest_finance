@@ -120,7 +120,7 @@ const displayMovements = function (movements, sort = false) {
       i + 1
     } ${type}</div>
         
-        <div class="movements__value">${movement}</div>
+        <div class="movements__value">${movement.toFixed(2)}</div>
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -147,7 +147,7 @@ const calcDisplaySummary = function (movements) {
     .filter(movement => movement > 0)
     .reduce((accumulator, current) => accumulator + current);
 
-  labelSumIn.textContent = depositUSD + '₤';
+  labelSumIn.textContent = depositUSD.toFixed(2) + '₤';
   // console.log(depositUSD);
 };
 
@@ -158,7 +158,7 @@ const calcDisplaySummaryOut = function (movements) {
     .filter(movement => movement < 0)
     .reduce((accumulator, current) => accumulator + current, 0);
 
-  labelSumOut.textContent = Math.abs(depositUSD) + '₤';
+  labelSumOut.textContent = Math.abs(depositUSD).toFixed(2) + '₤';
   // console.log(depositUSD);
 };
 
@@ -175,7 +175,7 @@ const calcDisplayInterest = function (movements, interest) {
     })
     .reduce((accumulator, current) => accumulator + current, 0);
 
-  labelSumInterest.textContent = totalInterest + '₤';
+  labelSumInterest.textContent = totalInterest.toFixed(2) + '₤';
 };
 // calcDisplayInterest(account1.movements, 0.012);
 
@@ -183,7 +183,7 @@ const calcPrintBalance = function (account) {
   account.balance = account.movements.reduce((accumulator, current, i) => {
     return accumulator + current;
   });
-  labelBalance.textContent = `${account.balance} €`;
+  labelBalance.textContent = `${account.balance.toFixed(2)} €`;
   // return balance;
 };
 
@@ -256,7 +256,7 @@ btnTransfer.addEventListener('click', evt => {
 // Request loan
 btnLoan.addEventListener('click', evt => {
   evt.preventDefault();
-  const loanAmount = Number(inputLoanAmount.value);
+  const loanAmount = Math.floor(inputLoanAmount.value);
   const loanAmountDepositEligible = (10 / 100) * loanAmount;
   const loanEligibility = currentAccount.movements.some(
     movement => movement >= loanAmountDepositEligible
