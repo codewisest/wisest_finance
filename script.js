@@ -509,7 +509,8 @@ console.log(Math.PI);
 console.log(Math.trunc(Math.random() * 6 + 1));
 
 // Random number with limit
-const randomInt = (min, max) => Math.trunc(Math.random() * (max - min) + min);
+const randomInt = (min, max) =>
+  Math.floor(Math.random() * (max - min) + 1) + min;
 
 console.log(randomInt(6, 10));
 
