@@ -73,9 +73,6 @@ const account4 = {
     '2019-12-25T06:04:23.907Z',
     '2020-01-25T14:18:46.235Z',
     '2020-02-05T16:33:06.386Z',
-    '2020-04-10T14:43:26.374Z',
-    '2020-06-25T18:49:59.371Z',
-    '2020-07-26T12:01:20.894Z',
   ],
   currency: 'USD',
   locale: 'en-US',
@@ -109,9 +106,11 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
-  const moves = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const moves = sort
+    ? account.movements.slice().sort((a, b) => a - b)
+    : account.movements;
   moves.forEach((movement, i) => {
     const type = movement > 0 ? 'deposit' : 'withdrawal';
     const html = `
@@ -119,11 +118,14 @@ const displayMovements = function (movements, sort = false) {
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-        
+    <div class="movements__date">${new Date(
+      account.movementsDates[i]
+    ).toLocaleDateString()}</div>
         <div class="movements__value">${movement.toFixed(2)}</div>
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
+    labelDate.textContent = new Date().toLocaleString();
   });
 };
 
@@ -209,7 +211,7 @@ btnLogin.addEventListener('click', evt => {
 console.log(currentAccount);
 
 const updateAccount = function (account) {
-  displayMovements(account.movements);
+  displayMovements(account);
   calcPrintBalance(account);
   calcDisplaySummary(account.movements);
   calcDisplaySummaryOut(account.movements);
@@ -243,8 +245,14 @@ btnTransfer.addEventListener('click', evt => {
     transferAmount > 0 &&
     currentBalance >= transferAmount
   ) {
+    // do the transfer
     recipient.movements.push(transferAmount);
     currentAccount.movements.push(-transferAmount);
+
+    // add transfer dates
+    recipient.movementsDates.push(new Date().toISOString());
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     updateAccount(currentAccount);
   } else {
     alert('Invalid transaction');
@@ -264,6 +272,7 @@ btnLoan.addEventListener('click', evt => {
 
   if (loanEligibility === true) {
     currentAccount.movements.push(loanAmount);
+    currentAccount.movementsDates.push(new Date().toISOString());
     updateAccount(currentAccount);
   } else {
     alert('You are not qualified');
