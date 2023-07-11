@@ -525,3 +525,17 @@ console.log(Math.floor(23.9));
 
 console.log(Math.trunc(-23.9).toFixed(2));
 console.log(Math.floor(-23.9));
+
+// Remainder operator
+const isEven = n => n % 2 === 0;
+
+console.log(isEven(8));
+console.log(isEven(7));
+
+labelBalance.addEventListener('click', () => {
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    if (i % 2) {
+      row.style.backgroundColor = 'orangered';
+    }
+  });
+});
