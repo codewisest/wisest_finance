@@ -539,3 +539,30 @@ labelBalance.addEventListener('click', () => {
     }
   });
 });
+
+// big int
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+
+// date and time
+const now = new Date();
+console.log(now);
+
+console.log(new Date('11/6/23 18:05'));
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 11, 31));
+
+console.log(new Date(0));
+
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future);
+
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.toISOString());
+console.log(future.getTime());
+console.log(Date.now());
