@@ -153,7 +153,20 @@ const displayMovements = function (account, sort = false) {
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
-    labelDate.textContent = new Date().toLocaleString();
+    const now = new Date();
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: 'numeric',
+      year: 'numeric',
+      weekday: 'short',
+      month: 'long',
+    };
+    const locale = navigator.language;
+    console.log(locale);
+    labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(
+      now
+    );
   });
 };
 
