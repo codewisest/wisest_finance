@@ -68,9 +68,9 @@ const account4 = {
   interestRate: 1,
   pin: 4444,
   movementsDates: [
-    '2019-11-01T13:15:33.035Z',
-    '2019-11-30T09:48:16.867Z',
-    '2019-12-25T06:04:23.907Z',
+    '2023-07-12T13:15:33.035Z',
+    '2023-07-11T09:48:16.867Z',
+    '2023-07-08T06:04:23.907Z',
     '2020-01-25T14:18:46.235Z',
     '2020-02-05T16:33:06.386Z',
   ],
@@ -106,21 +106,49 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+// calculate difference in days
+
+const calcDaysPassed = (date1, date2) => {
+  let daysElapsed = Math.round(Math.abs(date1 - date2) / (1000 * 60 * 60 * 24));
+  let whenMoved;
+
+  if (daysElapsed === 0) {
+    whenMoved = 'Today';
+  } else if (daysElapsed === 1) {
+    whenMoved = 'Yesterday';
+  } else if (daysElapsed <= 7) {
+    whenMoved = `${daysElapsed} days ago`;
+  } else {
+    whenMoved = date2.toLocaleDateString();
+  }
+
+  return whenMoved;
+};
+
+// const differenceDays = calcDaysPassed(
+//   new Date(2037, 3, 14),
+//   new Date(2037, 3, 24)
+// );
+// console.log(differenceDays);
+
 const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
   const moves = sort
     ? account.movements.slice().sort((a, b) => a - b)
     : account.movements;
   moves.forEach((movement, i) => {
+    const numberOfDaysPassed = calcDaysPassed(
+      new Date(),
+      new Date(account.movementsDates[i])
+    );
     const type = movement > 0 ? 'deposit' : 'withdrawal';
     const html = `
       <div class="movements__row">
         <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-    <div class="movements__date">${new Date(
-      account.movementsDates[i]
-    ).toLocaleDateString()}</div>
+    
+    <div class="movements__date">${numberOfDaysPassed}</div>
         <div class="movements__value">${movement.toFixed(2)}</div>
       </div>
     `;
@@ -575,3 +603,16 @@ console.log(future.getDate());
 console.log(future.toISOString());
 console.log(future.getTime());
 console.log(Date.now());
+
+console.log(Number(future));
+
+// CALCULATE DIFFERENCE IN DAYS
+
+// const calcDaysPassed = (date1, date2) =>
+//   (date2 - date1) / (1000 * 60 * 60 * 24);
+
+// const differenceDays = calcDaysPassed(
+//   new Date(2037, 3, 14),
+//   new Date(2037, 3, 24)
+// );
+// console.log(differenceDays);
