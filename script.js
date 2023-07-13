@@ -194,7 +194,7 @@ const calcDisplaySummary = function (movements) {
     .filter(movement => movement > 0)
     .reduce((accumulator, current) => accumulator + current);
 
-  labelSumIn.textContent = depositUSD.toFixed(2) + '₤';
+  labelSumIn.textContent = formatCurrency(depositUSD.toFixed(2));
   // console.log(depositUSD);
 };
 
@@ -205,7 +205,7 @@ const calcDisplaySummaryOut = function (movements) {
     .filter(movement => movement < 0)
     .reduce((accumulator, current) => accumulator + current, 0);
 
-  labelSumOut.textContent = Math.abs(depositUSD).toFixed(2) + '₤';
+  labelSumOut.textContent = formatCurrency(Math.abs(depositUSD).toFixed(2));
   // console.log(depositUSD);
 };
 
@@ -222,7 +222,7 @@ const calcDisplayInterest = function (movements, interest) {
     })
     .reduce((accumulator, current) => accumulator + current, 0);
 
-  labelSumInterest.textContent = totalInterest.toFixed(2) + '₤';
+  labelSumInterest.textContent = formatCurrency(totalInterest.toFixed(2));
 };
 // calcDisplayInterest(account1.movements, 0.012);
 
@@ -230,7 +230,7 @@ const calcPrintBalance = function (account) {
   account.balance = account.movements.reduce((accumulator, current, i) => {
     return accumulator + current;
   });
-  labelBalance.textContent = `${account.balance.toFixed(2)} €`;
+  labelBalance.textContent = `${formatCurrency(account.balance.toFixed(2))}`;
   // return balance;
 };
 
