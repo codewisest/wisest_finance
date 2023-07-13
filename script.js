@@ -125,11 +125,13 @@ const calcDaysPassed = (date1, date2) => {
   return whenMoved;
 };
 
-// const differenceDays = calcDaysPassed(
-//   new Date(2037, 3, 14),
-//   new Date(2037, 3, 24)
-// );
-// console.log(differenceDays);
+const optionsNG = {
+  style: 'currency',
+  currency: 'NGN',
+};
+
+const formatCurrency = amount =>
+  new Intl.NumberFormat('en-NG', optionsNG).format(amount);
 
 const displayMovements = function (account, sort = false) {
   containerMovements.innerHTML = '';
@@ -149,7 +151,9 @@ const displayMovements = function (account, sort = false) {
     } ${type}</div>
     
     <div class="movements__date">${numberOfDaysPassed}</div>
-        <div class="movements__value">${movement.toFixed(2)}</div>
+        <div class="movements__value">${formatCurrency(
+          movement.toFixed(2)
+        )}</div>
       </div>
     `;
     containerMovements.insertAdjacentHTML('afterbegin', html);
@@ -629,3 +633,12 @@ console.log(Number(future));
 //   new Date(2037, 3, 24)
 // );
 // console.log(differenceDays);
+
+const num = 3884764.23;
+
+const options = {
+  style: 'currency',
+  currency: 'NGN',
+};
+
+console.log('US:', new Intl.NumberFormat('en-NG', options).format(num));
