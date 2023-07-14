@@ -646,3 +646,9 @@ console.log('US:', new Intl.NumberFormat('en-NG', options).format(num));
 // timers
 setTimeout(name => console.log(`Here is your pizza ${name}`), 5000, 'Chiji');
 console.log('Waiting...');
+
+// setinterval
+setInterval(function () {
+  const now = new Date();
+  console.log(now);
+}, 1000);
