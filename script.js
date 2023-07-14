@@ -234,10 +234,45 @@ const calcPrintBalance = function (account) {
   // return balance;
 };
 
+// logout timer
+let timer;
+
+const tenMinutesCountdown = function () {
+  let duration = 100;
+
+  const tick = () => {
+    const min = duration / 60;
+    const sec = duration % 60;
+    labelTimer.textContent = `${String(Math.floor(min)).padStart(
+      2,
+      0
+    )} : ${String(sec).padStart(2, 0)}`;
+    if (duration === 0) {
+      clearInterval(timer);
+      logout();
+    } else {
+      duration--;
+    }
+  };
+  tick();
+  timer = setInterval(tick, 1000);
+};
+
+// logout
+const logout = function () {
+  containerApp.style.opacity = 0;
+};
+
 // Event handler
 let currentAccount;
 btnLogin.addEventListener('click', evt => {
   evt.preventDefault();
+
+  if (timer) {
+    clearInterval(timer);
+  }
+
+  tenMinutesCountdown();
 
   currentAccount = accounts.find(account => {
     return account.username === inputLoginUsername.value;
@@ -276,6 +311,9 @@ const findAccountIndex = user => {
 // Transfer money
 btnTransfer.addEventListener('click', evt => {
   evt.preventDefault();
+  clearInterval(timer);
+
+  tenMinutesCountdown();
   console.log(currentAccount);
   const currentBalance = currentAccount.balance;
 
@@ -309,6 +347,9 @@ btnTransfer.addEventListener('click', evt => {
 // Request loan
 btnLoan.addEventListener('click', evt => {
   evt.preventDefault();
+  clearInterval(timer);
+
+  tenMinutesCountdown();
   const loanAmount = Math.floor(inputLoanAmount.value);
   const loanAmountDepositEligible = (10 / 100) * loanAmount;
   const loanEligibility = currentAccount.movements.some(
@@ -648,7 +689,7 @@ setTimeout(name => console.log(`Here is your pizza ${name}`), 5000, 'Chiji');
 console.log('Waiting...');
 
 // setinterval
-setInterval(function () {
-  const now = new Date();
-  console.log(now);
-}, 1000);
+// setInterval(function () {
+//   const now = new Date();
+//   console.log(now);
+// }, 1000);
